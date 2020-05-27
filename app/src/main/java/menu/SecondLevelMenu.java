@@ -34,10 +34,6 @@ public class SecondLevelMenu extends LinearLayout {
 
 
     private Context mContext;
-    private int mContentWidth = 500;
-    private int mChildMenuWidth = 200;
-    private int mSeekBarWidth = 500;
-    private int mHeight = 100;
     private List<View> mChildList;
     private int mType = -1;
     public final static int TYPE_LEAVE = 1001;
@@ -94,7 +90,7 @@ public class SecondLevelMenu extends LinearLayout {
     private void initView(Context context) {
         mContext = context;
         final TextView textView = new TextView(context);
-        LayoutParams params_tv = new LayoutParams(mContentWidth, mHeight);
+        LayoutParams params_tv = new LayoutParams(MenuHelper.mSecondMenuWidth, MenuHelper.mHeight);
 
         textView.setBackgroundColor(Color.GREEN);
         params_tv.topMargin = 2;
