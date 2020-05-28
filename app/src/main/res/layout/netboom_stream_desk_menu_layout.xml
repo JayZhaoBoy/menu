@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <menu.FirstLevelMenu
+        android:id="@+id/first_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/netboom_menu_background_shape" />
+
+
+    <ScrollView
+        android:id="@+id/child_menu"
+        android:layout_width="400dp"
+        android:layout_height="match_parent"
+        android:layout_alignTop="@+id/first_menu"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="38dp"
+        android:layout_toRightOf="@+id/first_menu"
+        android:background="@drawable/netboom_menu_background_shape"
+        android:fillViewport="true"
+        android:padding="16dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="12dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/ll_leave_desktop"
+                    android:layout_width="160dp"
+                    android:layout_height="21dp"
+                    android:background="@drawable/netboom_menu_button_background_shape"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="17dp"
+                        android:layout_height="17dp"
+                        android:layout_marginLeft="2dp"
+                        android:src="@mipmap/netboom_menu_leave_desktop_icon" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/netboom_leave_desktop"
+                        android:textColor="#ffffff"
+                        android:textSize="11sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_switch_process"
+                    android:layout_width="160dp"
+                    android:layout_height="21dp"
+                    android:layout_marginLeft="12dp"
+                    android:background="@drawable/netboom_menu_button_background_shape"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="17dp"
+                        android:layout_height="17dp"
+                        android:layout_marginLeft="2dp"
+                        android:src="@mipmap/netboom_menu_switch_process_icon" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/netboom_switch_process"
+                        android:textColor="#ffffff"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_task_manager"
+                android:layout_width="160dp"
+                android:layout_height="21dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/netboom_menu_button_background_shape"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:layout_marginLeft="2dp"
+                    android:src="@mipmap/netboom_menu_task_manager_icon" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="@string/netboom_task_manager"
+                    android:textColor="#ffffff"
+                    android:textSize="11sp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="96dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/netboom_motion_assistant"
+                    android:textColor="#ffffff"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_shut_down"
+                    android:layout_width="wrap_content"
+                    android:layout_height="18dp"
+                    android:background="@drawable/netboom_menu_text_background_selector"
+                    android:gravity="center"
+                    android:minWidth="48dp"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:text="@string/netboom_motion_assistant_shut_down"
+                    android:textColor="@drawable/netboom_menu_text_selector"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tv_mode1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="18dp"
+                    android:layout_marginLeft="8dp"
+                    android:background="@drawable/netboom_menu_text_background_selector"
+                    android:gravity="center"
+                    android:minWidth="48dp"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:text="@string/netboom_motion_assistant_mode1"
+                    android:textColor="@drawable/netboom_menu_text_selector"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tv_mode2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="18dp"
+                    android:layout_marginLeft="8dp"
+                    android:background="@drawable/netboom_menu_text_background_selector"
+                    android:gravity="center"
+                    android:minWidth="48dp"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:text="@string/netboom_motion_assistant_mode2"
+                    android:textColor="@drawable/netboom_menu_text_selector"
+                    android:textSize="10sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_motion_sensitivity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:gravity="center_vertical"
+                android:visibility="gone"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="96dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/netboom_motion_sensitivity"
+                    android:textColor="#ffffff"
+                    android:textSize="12sp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:textColor="#B6B6B6"
+                    android:textSize="10sp" />
+
+                <androidx.appcompat.widget.AppCompatSeekBar
+                    android:id="@+id/seekbar_motion"
+                    android:layout_width="190dp"
+                    android:layout_height="wrap_content"
+                    android:max="9"
+                    android:progress="5"
+                    android:progressDrawable="@drawable/netboom_menu_seekbar_process"
+                    android:thumb="@drawable/netboom_menu_seekbar_thump" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:textColor="#B6B6B6"
+                    android:textSize="10sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="96dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/netboom_select_pixel"
+                    android:textColor="#ffffff"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_pixel_low"
+                    android:layout_width="wrap_content"
+                    android:layout_height="18dp"
+                    android:background="@drawable/netboom_menu_text_background_selector"
+                    android:gravity="center"
+                    android:minWidth="48dp"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:text="@string/netboom_pixel_low"
+                    android:textColor="@drawable/netboom_menu_text_selector"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tv_pixel_medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="18dp"
+                    android:layout_marginLeft="8dp"
+                    android:background="@drawable/netboom_menu_text_background_selector"
+                    android:gravity="center"
+                    android:minWidth="48dp"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:text="@string/netboom_pixel_medium"
+                    android:textColor="@drawable/netboom_menu_text_selector"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tv_pixel_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="18dp"
+                    android:layout_marginLeft="8dp"
+                    android:background="@drawable/netboom_menu_text_background_selector"
+                    android:gravity="center"
+                    android:minWidth="48dp"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:text="@string/netboom_pixel_high"
+                    android:textColor="@drawable/netboom_menu_text_selector"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tv_pixel_super_high"
+                    android:layout_width="wrap_content"
+                    android:layout_height="18dp"
+                    android:layout_marginLeft="8dp"
+                    android:background="@drawable/netboom_menu_text_background_selector"
+                    android:gravity="center"
+                    android:minWidth="48dp"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:text="@string/netboom_pixel_super_high"
+                    android:textColor="@drawable/netboom_menu_text_selector"
+                    android:textSize="10sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="96dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/netboom_mouse_mode"
+                    android:textColor="#ffffff"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_mode_touch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="18dp"
+                    android:background="@drawable/netboom_menu_text_background_selector"
+                    android:gravity="center"
+                    android:minWidth="48dp"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:text="@string/netboom_mode_touch"
+                    android:textColor="@drawable/netboom_menu_text_selector"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tv_mode_mouse"
+                    android:layout_width="wrap_content"
+                    android:layout_height="18dp"
+                    android:layout_marginLeft="8dp"
+                    android:background="@drawable/netboom_menu_text_background_selector"
+                    android:gravity="center"
+                    android:minWidth="48dp"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:text="@string/netboom_mode_mouse"
+                    android:textColor="@drawable/netboom_menu_text_selector"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tv_gesture_instruction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="18dp"
+                    android:layout_marginLeft="8dp"
+                    android:background="@drawable/netboom_menu_text_background_selector"
+                    android:gravity="center"
+                    android:minWidth="48dp"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:text="@string/netboom_mode_gesture_instruction"
+                    android:textColor="@drawable/netboom_menu_text_selector"
+                    android:textSize="10sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="96dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/netboom_mouse_speed"
+                    android:textColor="#ffffff"
+                    android:textSize="12sp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/netboom_mouse_speed_slow"
+                    android:textColor="#B6B6B6"
+                    android:textSize="10sp" />
+
+                <androidx.appcompat.widget.AppCompatSeekBar
+                    android:id="@+id/seekbar"
+                    android:layout_width="190dp"
+                    android:layout_height="wrap_content"
+                    android:max="10"
+                    android:progress="5"
+                    android:progressDrawable="@drawable/netboom_menu_seekbar_process"
+                    android:thumb="@drawable/netboom_menu_seekbar_thump" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/netboom_mouse_speed_fast"
+                    android:textColor="#B6B6B6"
+                    android:textSize="10sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="96dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/netboom_speed_monitor"
+                        android:textColor="#ffffff"
+                        android:textSize="12sp" />
+
+                    <Switch
+                        android:id="@+id/switch_speed_monitor"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:showText="true"
+                        android:switchTextAppearance="@style/NetBoomSwitchTheme"
+                        android:textOff="OFF"
+                        android:textOn="ON"
+                        android:thumb="@drawable/netboom_switch_rectangle_thumb_selector"
+                        android:track="@drawable/netboom_switch_rectangle_track" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/netboom_vibrate"
+                        android:textColor="#ffffff"
+                        android:textSize="12sp" />
+
+                    <Switch
+                        android:id="@+id/switch_vibrate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12dp"
+                        android:showText="true"
+                        android:switchTextAppearance="@style/NetBoomSwitchTheme"
+                        android:textOff="OFF"
+                        android:textOn="ON"
+                        android:thumb="@drawable/netboom_switch_rectangle_thumb_selector"
+                        android:track="@drawable/netboom_switch_rectangle_track" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="96dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/netboom_full_screen"
+                    android:textColor="#ffffff"
+                    android:textSize="12sp" />
+
+                <Switch
+                    android:id="@+id/switch_full_screen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:showText="true"
+                    android:switchTextAppearance="@style/NetBoomSwitchTheme"
+                    android:textOff="OFF"
+                    android:textOn="ON"
+                    android:thumb="@drawable/netboom_switch_rectangle_thumb_selector"
+                    android:track="@drawable/netboom_switch_rectangle_track" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

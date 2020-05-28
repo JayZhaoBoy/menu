@@ -5,7 +5,6 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -14,8 +13,6 @@ import androidx.annotation.Nullable;
 
 import com.aylong.myapplication.R;
 
-import java.util.List;
-
 /**
  * @author JayZhao
  * @date 2020/5/25
@@ -23,6 +20,9 @@ import java.util.List;
 public class FirstLevelMenu extends LinearLayout {
     private Context mContext;
     private StreamDeskMenuView.OnFirstMenuCloseListener mMenuCloseListener;
+    private final int[] ids = new int[]{R.mipmap.netboom_menu_turn_off,
+            R.mipmap.netboom_menu_settings,
+            R.mipmap.netboom_menu_keybords};
     /**
      * 业务操作监听
      */
@@ -75,19 +75,18 @@ public class FirstLevelMenu extends LinearLayout {
 
     private void init(Context context) {
         mContext = context;
+        setImageList();
     }
 
     /**
      * 设置菜单icon
-     *
-     * @param ids
      */
-    public void setImageList(int[] ids) {
-        LayoutParams params = new LayoutParams(150, 150);
-        params.leftMargin = 20;
-        params.rightMargin = 20;
-        params.topMargin = 20;
-        params.bottomMargin = 20;
+    private void setImageList() {
+        int side = dip2px(mContext, 28);
+        LayoutParams params = new LayoutParams(side, side);
+        params.leftMargin = dip2px(mContext, 16);
+        params.topMargin = dip2px(mContext, 6);
+        params.bottomMargin = dip2px(mContext, 6);
 
         if (ids == null || ids.length == 0) {
             return;
@@ -116,9 +115,10 @@ public class FirstLevelMenu extends LinearLayout {
                 mMaxWidth = mInnerLl.getWidth();
             }
         });
+
         mImg_change = new ImageView(mContext);
         mImg_change.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        mImg_change.setImageResource(R.mipmap.arrow_right);
+        mImg_change.setImageResource(R.mipmap.netboom_menu_arrow_right);
         mImg_change.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,13 +150,13 @@ public class FirstLevelMenu extends LinearLayout {
             r_begin = 0;
             r_end = 180;
             mMenuState = MENU_SHAPE_CLOSE;
-            if (mMenuCloseListener != null){
+            if (mMenuCloseListener != null) {
                 mMenuCloseListener.onFirstMenuClosed();
             }
         }
-        ObjectAnimator animator_scale = ObjectAnimator.ofFloat(mInnerLl, TRANSLATION_X, x_begin, x_end);
-        animator_scale.removeAllListeners();
-        animator_scale.addListener(new Animator.AnimatorListener() {
+        ObjectAnimator animator_trans = ObjectAnimator.ofFloat(this, TRANSLATION_X, x_begin, x_end);
+        animator_trans.removeAllListeners();
+        animator_trans.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animation) {
                 isAnimating = true;
@@ -178,10 +178,9 @@ public class FirstLevelMenu extends LinearLayout {
             }
         });
 
-        ObjectAnimator animator_scaleImg = ObjectAnimator.ofFloat(mImg_change, TRANSLATION_X, x_begin, x_end);
         ObjectAnimator animator_rotate = ObjectAnimator.ofFloat(mImg_change, ROTATION, r_begin, r_end);
         final AnimatorSet animatorSet = new AnimatorSet();
-        animatorSet.play(animator_scale).with(animator_scaleImg).with(animator_rotate);
+        animatorSet.play(animator_trans).with(animator_rotate);
         animatorSet.setDuration(300);
         animatorSet.start();
     }
@@ -209,10 +208,16 @@ public class FirstLevelMenu extends LinearLayout {
 
     /**
      * 设置一级菜单关闭监听
+     *
      * @param listener
      */
-    public void setOnFirstMenuCloseListener(StreamDeskMenuView.OnFirstMenuCloseListener listener){
+    public void setOnFirstMenuCloseListener(StreamDeskMenuView.OnFirstMenuCloseListener listener) {
         mMenuCloseListener = listener;
+    }
+
+    private int dip2px(Context context, float dpValue) {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
     }
 
 }

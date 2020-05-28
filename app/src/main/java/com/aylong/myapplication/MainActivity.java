@@ -2,45 +2,153 @@ package com.aylong.myapplication;
 
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
+import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
-
-import menu.FirstLevelMenu;
-import menu.SecondLevelMenu;
+import menu.NetSpeed;
+import menu.NetSpeedTimer;
+import menu.OnSettingMenuListener;
+import menu.StreamDeskMenuView;
 
 /**
  * @author admin
  */
 public class MainActivity extends AppCompatActivity {
-
+    private final static String TAG = "MainActivity";
+    private NetSpeedTimer mNetSpeedTimer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final TextView textView = findViewById(R.id.tv_net_speed);
+        Handler handler = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(@NonNull Message msg) {
+                textView.setText((String) msg.obj);
+                return false;
+            }
+        });
+        //创建NetSpeedTimer实例
+        mNetSpeedTimer = new NetSpeedTimer(this, new NetSpeed(), handler).setDelayTime(1000).setPeriodTime(2000);
+        //在想要开始执行的地方调用该段代码
+        mNetSpeedTimer.startSpeedTimer();
+
+
+
+        StreamDeskMenuView menuView = findViewById(R.id.menu);
+        menuView.setOnSettingMenuListener(new OnSettingMenuListener() {
+            @Override
+            public void onClickedGaccountAssistant() {
+
+            }
+
+            @Override
+            public void onClickedReCharge() {
+
+            }
+
+            @Override
+            public void onCLickedExitUse() {
+                Log.d(TAG, "onCLickedExitUse: exit");
+            }
+
+            @Override
+            public void onClickedStretchVideo(boolean stretchVideo) {
+
+            }
+
+            @Override
+            public void onClickedRealTimeMonitor(boolean enable) {
+
+            }
+
+            @Override
+            public void onClickedMouseMode(boolean mouseMode) {
+
+            }
+
+            @Override
+            public void onClickedGestureInstruction() {
+
+            }
+
+            @Override
+            public void onClickedTaskManager() {
+
+            }
+
+            @Override
+            public void onClickedProcessSwitch() {
+
+            }
+
+            @Override
+            public void onClickedDiscountPeriodTip(String tip) {
+
+            }
+
+            @Override
+            public void onClickedToAnliang(String tip) {
+
+            }
+
+            @Override
+            public void onClickedLeaveDesktop() {
+
+            }
+
+            @Override
+            public void onClickedGameKeyboard() {
+                Log.d(TAG, "onClickedGameKeyboard: keyBord");
+            }
+
+            @Override
+            public void onClickedPictureQuality(int bitrate) {
+                Log.d(TAG, "onClickedPictureQuality: " + bitrate);
+            }
+
+            @Override
+            public void onClickedMouseSpeed() {
+
+            }
+
+            @Override
+            public void onClickedAudioSwitch(boolean isOpen, View view) {
+
+            }
+
+            @Override
+            public void onClickedWordkeyboardSwitch(boolean isOpen) {
+
+            }
+
+            @Override
+            public void onClickedViberate(boolean isOpen) {
+
+            }
+
+            @Override
+            public void onClickedSensor(int gyroMode) {
+
+            }
+
+            @Override
+            public void onClickedSensorSensitivity(int sensitivity) {
+
+            }
+        });
+
 
 
     }
