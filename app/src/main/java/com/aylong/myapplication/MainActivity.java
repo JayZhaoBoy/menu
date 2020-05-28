@@ -11,7 +11,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +48,17 @@ public class MainActivity extends AppCompatActivity {
         //在想要开始执行的地方调用该段代码
         mNetSpeedTimer.startSpeedTimer();
 
+
+        WebView webView = new WebView(this);
+        webView.loadUrl("http://www.baidu.com");
+        webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                return false;
+            }
+        });
+        FrameLayout frameLayout = findViewById(R.id.fl);
+        frameLayout.addView(webView);
 
 
         StreamDeskMenuView menuView = findViewById(R.id.menu);

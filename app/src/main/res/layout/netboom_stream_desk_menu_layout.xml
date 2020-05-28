@@ -24,7 +24,8 @@
         android:background="@drawable/netboom_menu_background_shape"
         android:fillViewport="true"
         android:padding="16dp"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -176,8 +177,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="22dp"
                 android:gravity="center_vertical"
-                android:visibility="gone"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="96dp"

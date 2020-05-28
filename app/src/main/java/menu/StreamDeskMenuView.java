@@ -32,6 +32,7 @@ public class StreamDeskMenuView extends FrameLayout implements View.OnClickListe
     private Context mContext;
     private final static String CONFIG_DATA = "netboom_data";
     private final static String MOUSE_COUNT_KEY = "netboom_mouse_count";
+    private final static String PICTURE_QUALITY_KEY = "netboom_picture_quality";
     private ScrollView mScrollView;
     private TextView tv_pixel_low;
     private TextView tv_pixel_medium;
@@ -93,25 +94,22 @@ public class StreamDeskMenuView extends FrameLayout implements View.OnClickListe
         tv_pixel_superHigh.setOnClickListener(this);
 
         // 获取当前画质
-        boolean autoQuality = SPController.getInstance().getBooleanValue(SPController.id.KEY_IS_AUTO_QUALITY, true);
-        if (!autoQuality) {
-            int quality = SPController.getInstance().getBitrate();
-            switch (quality) {
-                case 0:
-                    tv_pixel_low.setSelected(true);
-                    break;
-                case 1:
-                    tv_pixel_medium.setSelected(true);
-                    break;
-                case 2:
-                    tv_pixel_high.setSelected(true);
-                    break;
-                case 3:
-                    tv_pixel_superHigh.setSelected(true);
-                    break;
-                default:
-                    break;
-            }
+        int quality = getPictureQuality();
+        switch (quality) {
+            case 0:
+                tv_pixel_low.setSelected(true);
+                break;
+            case 1:
+                tv_pixel_medium.setSelected(true);
+                break;
+            case 2:
+                tv_pixel_high.setSelected(true);
+                break;
+            case 3:
+                tv_pixel_superHigh.setSelected(true);
+                break;
+            default:
+                break;
         }
 
         tv_mode_touch = findViewById(R.id.tv_mode_touch);
@@ -153,7 +151,6 @@ public class StreamDeskMenuView extends FrameLayout implements View.OnClickListe
         switch_full_screen.setChecked(isFullScreen);
 
 
-
         // 体感
         tv_motion_shut_down = findViewById(R.id.tv_shut_down);
         tv_motion_shut_down.setOnClickListener(this);
@@ -164,6 +161,12 @@ public class StreamDeskMenuView extends FrameLayout implements View.OnClickListe
 
         ll_motion_sensitivity = findViewById(R.id.ll_motion_sensitivity);
 
+        AppCompatSeekBar seekBar_motion = findViewById(R.id.seekbar_motion);
+        seekBar_motion.setOnSeekBarChangeListener(seekBarChangeListener);
+        // 获取默认体感度
+        int defProcess = SPController.getInstance().getIntValue(SPController.id.KEY_GYROSCOPE_SENSITIVITY, 6);
+        seekBar_motion.setProgress(defProcess - 1);
+
         // 获取默认体感模式及初始化
         int mode = SPController.getInstance().getIntValue(SPController.id.KEY_GYROSCOPE_MODE, GyroscopeManager.SENSOR_MODE_NONE);
         GyroscopeManager.getInstance().setSensorMode(mode);
@@ -173,20 +176,15 @@ public class StreamDeskMenuView extends FrameLayout implements View.OnClickListe
                 break;
             case GyroscopeManager.SENSOR_MODE_RELATIVE:
                 tv_motion_mode1.setSelected(true);
+                ll_motion_sensitivity.setVisibility(VISIBLE);
                 break;
             case GyroscopeManager.SENSOR_MODE_RELATIVE_REVERSE:
                 tv_motion_mode2.setSelected(true);
+                ll_motion_sensitivity.setVisibility(VISIBLE);
                 break;
             default:
                 break;
         }
-
-        AppCompatSeekBar seekBar_motion = findViewById(R.id.seekbar_motion);
-        seekBar_motion.setOnSeekBarChangeListener(seekBarChangeListener);
-
-        // 获取默认体感度
-        int defProcess = SPController.getInstance().getIntValue(SPController.id.KEY_GYROSCOPE_SENSITIVITY, 6);
-        seekBar_motion.setProgress(defProcess - 1);
     }
 
     private CompoundButton.OnCheckedChangeListener checkedChangeListener = new CompoundButton.OnCheckedChangeListener() {
@@ -289,6 +287,7 @@ public class StreamDeskMenuView extends FrameLayout implements View.OnClickListe
             if (mMenuListener != null) {
                 resetPixelChooseState();
                 tv_pixel_low.setSelected(true);
+                setPictureQuality(0);
                 mMenuListener.onClickedPictureQuality(0);
             }
         } else if (id == R.id.tv_pixel_medium) {
@@ -298,6 +297,7 @@ public class StreamDeskMenuView extends FrameLayout implements View.OnClickListe
             if (mMenuListener != null) {
                 resetPixelChooseState();
                 tv_pixel_medium.setSelected(true);
+                setPictureQuality(1);
                 mMenuListener.onClickedPictureQuality(1);
             }
         } else if (id == R.id.tv_pixel_high) {
@@ -307,6 +307,7 @@ public class StreamDeskMenuView extends FrameLayout implements View.OnClickListe
             if (mMenuListener != null) {
                 resetPixelChooseState();
                 tv_pixel_high.setSelected(true);
+                setPictureQuality(2);
                 mMenuListener.onClickedPictureQuality(2);
             }
         } else if (id == R.id.tv_pixel_super_high) {
@@ -316,6 +317,7 @@ public class StreamDeskMenuView extends FrameLayout implements View.OnClickListe
             if (mMenuListener != null) {
                 resetPixelChooseState();
                 tv_pixel_superHigh.setSelected(true);
+                setPictureQuality(3);
                 mMenuListener.onClickedPictureQuality(3);
             }
         } else if (id == R.id.tv_mode_touch) {
@@ -355,7 +357,6 @@ public class StreamDeskMenuView extends FrameLayout implements View.OnClickListe
     }
 
     private void resetPixelChooseState() {
-        SPController.getInstance().setBooleanValue(SPController.id.KEY_IS_AUTO_QUALITY, false);
         tv_pixel_low.setSelected(false);
         tv_pixel_medium.setSelected(false);
         tv_pixel_high.setSelected(false);
@@ -436,5 +437,25 @@ public class StreamDeskMenuView extends FrameLayout implements View.OnClickListe
     private int getMouseSpeed() {
         SharedPreferences sharedPreferences = mContext.getSharedPreferences(CONFIG_DATA, Context.MODE_PRIVATE);
         return sharedPreferences.getInt(MOUSE_COUNT_KEY, 5);
+    }
+
+    /**
+     * 保存画质
+     *
+     * @param quality
+     */
+    private void setPictureQuality(int quality) {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(CONFIG_DATA, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(PICTURE_QUALITY_KEY, quality);
+        editor.commit();
+    }
+
+    /**
+     * 获取鼠标值
+     */
+    private int getPictureQuality() {
+        SharedPreferences sharedPreferences = mContext.getSharedPreferences(CONFIG_DATA, Context.MODE_PRIVATE);
+        return sharedPreferences.getInt(PICTURE_QUALITY_KEY, 1);
     }
 }
