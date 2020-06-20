@@ -47,6 +47,7 @@ public class StreamDeskMenuView extends FrameLayout implements View.OnClickListe
     private TextView tv_motion_mode1;
     private TextView tv_motion_mode2;
     private LinearLayout ll_motion_sensitivity;
+    private FirstLevelMenu firstLevelMenu;
 
 
     public StreamDeskMenuView(Context context) {
@@ -70,7 +71,7 @@ public class StreamDeskMenuView extends FrameLayout implements View.OnClickListe
         addView(view);
 
         mScrollView = findViewById(R.id.child_menu);
-        FirstLevelMenu firstLevelMenu = findViewById(R.id.first_menu);
+        firstLevelMenu = findViewById(R.id.first_menu);
         firstLevelMenu.setOnFirstMenuClickListener(menuClickListener);
         firstLevelMenu.setOnFirstMenuCloseListener(menuCloseListener);
 
@@ -371,6 +372,9 @@ public class StreamDeskMenuView extends FrameLayout implements View.OnClickListe
         public void onFirstMenuClosed() {
             if (mScrollView != null && mScrollView.getVisibility() == VISIBLE) {
                 mScrollView.setVisibility(GONE);
+                if (firstLevelMenu != null) {
+                    firstLevelMenu.setSettingState(false);
+                }
             }
         }
     };
@@ -389,6 +393,9 @@ public class StreamDeskMenuView extends FrameLayout implements View.OnClickListe
                     break;
                 case 1:
                     mScrollView.setVisibility(mScrollView.getVisibility() == VISIBLE ? GONE : VISIBLE);
+                    if (firstLevelMenu != null) {
+                        firstLevelMenu.setSettingState(mScrollView.getVisibility() == VISIBLE);
+                    }
                     break;
                 case 2:
                     if (mMenuListener != null) {

@@ -19,9 +19,10 @@ import com.aylong.myapplication.R;
  **/
 public class FirstLevelMenu extends LinearLayout {
     private Context mContext;
+    private ImageView settingImage;
     private StreamDeskMenuView.OnFirstMenuCloseListener mMenuCloseListener;
     private final int[] ids = new int[]{R.mipmap.netboom_menu_turn_off,
-            R.mipmap.netboom_menu_settings,
+            R.mipmap.netboom_menu_settings_unsel,
             R.mipmap.netboom_menu_keybords};
     /**
      * 业务操作监听
@@ -97,7 +98,12 @@ public class FirstLevelMenu extends LinearLayout {
         for (int i = 0; i < ids.length; i++) {
             ImageView img = new ImageView(mContext);
             img.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            img.setImageResource(ids[i]);
+            if (i == 1){
+                settingImage = img;
+                img.setImageResource(R.drawable.netboom_setting_bg_selector);
+            }else {
+                img.setImageResource(ids[i]);
+            }
             final int finalI = i;
             img.setOnClickListener(new OnClickListener() {
                 @Override
@@ -127,6 +133,12 @@ public class FirstLevelMenu extends LinearLayout {
         });
         addView(mInnerLl);
         addView(mImg_change, params);
+    }
+
+    public void setSettingState(boolean sel){
+        if (settingImage != null){
+            settingImage.setSelected(sel);
+        }
     }
 
     /**
